@@ -204,81 +204,96 @@
   </div>
 </div>
 
-<!-- VAS 健康量尺 -->
 <div class="section">
   <h2>今天的整體健康狀況</h2>
   <p>
-    我們想知道您今天的健康狀況有多好或多糟。<br>
-    這個量尺上的刻度由 0 數到 100。<br>
-    100 表示您能想像到的最好的健康狀況。<br>
-    0 表示您能想像到的最糟的健康狀況。<br>
-    請在量尺中打叉叉，以顯示您今天的健康狀況如何，並在下面的方格中填寫數字。
+    請在下列量尺上點擊，以表示您今天的健康狀況。<br>
+    0 = 您能想像到的最糟的健康狀況；100 = 您能想像到的最好的健康狀況。<br>
+    點擊後會自動顯示數值（精確到 0.1）。
   </p>
 
-  <div class="vas-container">
-    <div class="note">（此為示意垂直量尺，可依需要改為圖片或更精細的刻度呈現）</div>
-    <div class="vas-scale">
-      <!-- Top label -->
-      <div style="position:absolute; top:-10px; left:20px; font-size:12px;">
-        您能想像到的最好的健康狀況（100）
-      </div>
+  <style>
+    .vas-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .vas-scale-clickable {
+      position: relative;
+      width: 60px;
+      height: 400px;
+      background: linear-gradient(to top, #eee, #fff);
+      border: 2px solid #000;
+      cursor: crosshair;
+    }
+    .vas-marker {
+      position: absolute;
+      left: -10px;
+      width: 80px;
+      height: 2px;
+      background: red;
+      display: none;
+    }
+    .vas-label-top, .vas-label-bottom {
+      font-size: 14px;
+      width: 120px;
+    }
+  </style>
 
-      <!-- Marks every 10 units from 100 to 0 -->
-      <!-- 100 -->
-      <div class="vas-mark" style="top:10px;"></div>
-      <div class="vas-label" style="top:10px;">100</div>
+  <div class="vas-wrapper">
+    <div class="vas-label-top">最好的健康狀況 (100)</div>
 
-      <!-- 90 -->
-      <div class="vas-mark" style="top:32px;"></div>
-      <div class="vas-label" style="top:32px;">90</div>
-
-      <!-- 80 -->
-      <div class="vas-mark" style="top:54px;"></div>
-      <div class="vas-label" style="top:54px;">80</div>
-
-      <!-- 70 -->
-      <div class="vas-mark" style="top:76px;"></div>
-      <div class="vas-label" style="top:76px;">70</div>
-
-      <!-- 60 -->
-      <div class="vas-mark" style="top:98px;"></div>
-      <div class="vas-label" style="top:98px;">60</div>
-
-      <!-- 50 -->
-      <div class="vas-mark" style="top:120px;"></div>
-      <div class="vas-label" style="top:120px;">50</div>
-
-      <!-- 40 -->
-      <div class="vas-mark" style="top:142px;"></div>
-      <div class="vas-label" style="top:142px;">40</div>
-
-      <!-- 30 -->
-      <div class="vas-mark" style="top:164px;"></div>
-      <div class="vas-label" style="top:164px;">30</div>
-
-      <!-- 20 -->
-      <div class="vas-mark" style="top:186px;"></div>
-      <div class="vas-label" style="top:186px;">20</div>
-
-      <!-- 10 -->
-      <div class="vas-mark" style="top:208px;"></div>
-      <div class="vas-label" style="top:208px;">10</div>
-
-      <!-- 0 -->
-      <div class="vas-mark" style="top:230px;"></div>
-      <div class="vas-label" style="top:230px;">0</div>
-
-      <!-- Bottom label -->
-      <div style="position:absolute; bottom:-18px; left:20px; font-size:12px;">
-        您能想像到的最糟的健康狀況（0）
-      </div>
+    <div class="vas-scale-clickable" id="vasScale">
+      <div id="vasMarker" class="vas-marker"></div>
     </div>
 
-    <div class="vas-input">
-      您今天的健康狀況 =
-      <input type="number" name="vas_today" min="0" max="100" style="width:70px;">
+    <div class="vas-label-bottom">最糟的健康狀況 (0)</div>
+
+    <div>
+      <label>您今天的健康狀況 = </label>
+      <input type="number" id="vasValue" min="0" max="100" step="0.1" style="width:80px;">
     </div>
   </div>
+
+  <script>
+    const vasScale = document.getElementById("vasScale");
+    const vasMarker = document.getElementById("vasMarker");
+    const vasValue = document.getElementById("vasValue");
+
+    vasScale.addEventListener("click", function(event) {
+      const rect = vasScale.getBoundingClientRect();
+      const y = event.clientY - rect.top; // click position
+      const height = rect.height;
+
+      // Convert click position to 0–100 scale (inverted)
+      let value = (1 - y / height) * 100;
+      value = Math.max(0, Math.min(100, value)); // clamp
+      value = Math.round(value * 10) / 10; // round to 0.1
+
+      // Move marker
+      vasMarker.style.top = y + "px";
+      vasMarker.style.display = "block";
+
+      // Update box
+      vasValue.value = value;
+    });
+
+    // If user manually types a number, move the marker
+    vasValue.addEventListener("input", function() {
+      let v = parseFloat(vasValue.value);
+      if (isNaN(v)) return;
+
+      v = Math.max(0, Math.min(100, v));
+      const rect = vasScale.getBoundingClientRect();
+      const height = rect.height;
+
+      const y = height * (1 - v / 100);
+
+      vasMarker.style.top = y + "px";
+      vasMarker.style.display = "block";
+    });
+  </script>
 </div>
 
 </body>
