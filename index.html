@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>EuroQoL 5 維度 5 等級（EQ-5D-5L）</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-bottom: 0.3em;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .item-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .options {
+      margin-left: 1em;
+    }
+    .options label {
+      display: block;
+      margin: 2px 0;
+    }
+    .vas-container {
+      margin-top: 10px;
+    }
+    .vas-scale {
+      position: relative;
+      height: 260px;
+      width: 120px;
+      border-left: 2px solid #000;
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .vas-mark {
+      position: absolute;
+      left: -6px;
+      width: 12px;
+      height: 1px;
+      background: #000;
+    }
+    .vas-label {
+      position: absolute;
+      left: 20px;
+      font-size: 12px;
+      transform: translateY(50%);
+    }
+    .vas-input {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<h1>EuroQoL 5 維度 5 等級（EQ-5D-5L）</h1>
+
+<p>請在每個標題下列選最能形容您今天的健康狀況的一個方格。</p>
+
+<!-- 1) 行動能力 -->
+<div class="section">
+  <div class="item-title">1）行動能力</div>
+  <div class="options">
+    <label>
+      <input type="radio" name="mobility" value="1">
+      我可以四處走動，沒有任何問題
+    </label>
+    <label>
+      <input type="radio" name="mobility" value="2">
+      我的行動有輕微問題
+    </label>
+    <label>
+      <input type="radio" name="mobility" value="3">
+      我的行動有中度問題
+    </label>
+    <label>
+      <input type="radio" name="mobility" value="4">
+      我的行動有嚴重問題
+    </label>
+    <label>
+      <input type="radio" name="mobility" value="5">
+      我無法行動
+    </label>
+  </div>
+</div>
+
+<!-- 2) 自我照顧 -->
+<div class="section">
+  <div class="item-title">2）自我照顧</div>
+  <div class="options">
+    <label>
+      <input type="radio" name="selfcare" value="1">
+      我在洗澡或穿衣方面沒有任何問題
+    </label>
+    <label>
+      <input type="radio" name="selfcare" value="2">
+      我在洗澡或穿衣方面有輕微問題
+    </label>
+    <label>
+      <input type="radio" name="selfcare" value="3">
+      我在洗澡或穿衣方面有中度問題
+    </label>
+    <label>
+      <input type="radio" name="selfcare" value="4">
+      我在洗澡或穿衣方面有嚴重問題
+    </label>
+    <label>
+      <input type="radio" name="selfcare" value="5">
+      我無法自己洗澡或穿衣
+    </label>
+  </div>
+</div>
+
+<!-- 3) 平常活動 -->
+<div class="section">
+  <div class="item-title">3）平常活動（如工作、讀書、家務、家庭或休閒活動）</div>
+  <div class="options">
+    <label>
+      <input type="radio" name="usual_activities" value="1">
+      我能進行平常活動，沒有任何問題
+    </label>
+    <label>
+      <input type="radio" name="usual_activities" value="2">
+      我在進行平常活動方面有輕微問題
+    </label>
+    <label>
+      <input type="radio" name="usual_activities" value="3">
+      我在進行平常活動方面有中度問題
+    </label>
+    <label>
+      <input type="radio" name="usual_activities" value="4">
+      我在進行平常活動方面有嚴重問題
+    </label>
+    <label>
+      <input type="radio" name="usual_activities" value="5">
+      我無法進行平常活動
+    </label>
+  </div>
+</div>
+
+<!-- 4) 疼痛 / 不舒服 -->
+<div class="section">
+  <div class="item-title">4）疼痛 / 不舒服</div>
+  <div class="options">
+    <label>
+      <input type="radio" name="pain_discomfort" value="1">
+      我沒有任何疼痛或不舒服
+    </label>
+    <label>
+      <input type="radio" name="pain_discomfort" value="2">
+      我覺得輕微疼痛或不舒服
+    </label>
+    <label>
+      <input type="radio" name="pain_discomfort" value="3">
+      我覺得中度疼痛或不舒服
+    </label>
+    <label>
+      <input type="radio" name="pain_discomfort" value="4">
+      我覺得嚴重疼痛或不舒服
+    </label>
+    <label>
+      <input type="radio" name="pain_discomfort" value="5">
+      我覺得極度疼痛或不舒服
+    </label>
+  </div>
+</div>
+
+<!-- 5) 焦慮 / 沮喪 -->
+<div class="section">
+  <div class="item-title">5）焦慮 / 沮喪</div>
+  <div class="options">
+    <label>
+      <input type="radio" name="anxiety_depression" value="1">
+      我不覺得焦慮或沮喪
+    </label>
+    <label>
+      <input type="radio" name="anxiety_depression" value="2">
+      我覺得輕微焦慮或沮喪
+    </label>
+    <label>
+      <input type="radio" name="anxiety_depression" value="3">
+      我覺得中度焦慮或沮喪
+    </label>
+    <label>
+      <input type="radio" name="anxiety_depression" value="4">
+      我覺得嚴重焦慮或沮喪
+    </label>
+    <label>
+      <input type="radio" name="anxiety_depression" value="5">
+      我覺得極度焦慮或沮喪
+    </label>
+  </div>
+</div>
+
+<!-- VAS 健康量尺 -->
+<div class="section">
+  <h2>今天的整體健康狀況</h2>
+  <p>
+    我們想知道您今天的健康狀況有多好或多糟。<br>
+    這個量尺上的刻度由 0 數到 100。<br>
+    100 表示您能想像到的最好的健康狀況。<br>
+    0 表示您能想像到的最糟的健康狀況。<br>
+    請在量尺中打叉叉，以顯示您今天的健康狀況如何，並在下面的方格中填寫數字。
+  </p>
+
+  <div class="vas-container">
+    <div class="note">（此為示意垂直量尺，可依需要改為圖片或更精細的刻度呈現）</div>
+    <div class="vas-scale">
+      <!-- Top label -->
+      <div style="position:absolute; top:-10px; left:20px; font-size:12px;">
+        您能想像到的最好的健康狀況（100）
+      </div>
+
+      <!-- Marks every 10 units from 100 to 0 -->
+      <!-- 100 -->
+      <div class="vas-mark" style="top:10px;"></div>
+      <div class="vas-label" style="top:10px;">100</div>
+
+      <!-- 90 -->
+      <div class="vas-mark" style="top:32px;"></div>
+      <div class="vas-label" style="top:32px;">90</div>
+
+      <!-- 80 -->
+      <div class="vas-mark" style="top:54px;"></div>
+      <div class="vas-label" style="top:54px;">80</div>
+
+      <!-- 70 -->
+      <div class="vas-mark" style="top:76px;"></div>
+      <div class="vas-label" style="top:76px;">70</div>
+
+      <!-- 60 -->
+      <div class="vas-mark" style="top:98px;"></div>
+      <div class="vas-label" style="top:98px;">60</div>
+
+      <!-- 50 -->
+      <div class="vas-mark" style="top:120px;"></div>
+      <div class="vas-label" style="top:120px;">50</div>
+
+      <!-- 40 -->
+      <div class="vas-mark" style="top:142px;"></div>
+      <div class="vas-label" style="top:142px;">40</div>
+
+      <!-- 30 -->
+      <div class="vas-mark" style="top:164px;"></div>
+      <div class="vas-label" style="top:164px;">30</div>
+
+      <!-- 20 -->
+      <div class="vas-mark" style="top:186px;"></div>
+      <div class="vas-label" style="top:186px;">20</div>
+
+      <!-- 10 -->
+      <div class="vas-mark" style="top:208px;"></div>
+      <div class="vas-label" style="top:208px;">10</div>
+
+      <!-- 0 -->
+      <div class="vas-mark" style="top:230px;"></div>
+      <div class="vas-label" style="top:230px;">0</div>
+
+      <!-- Bottom label -->
+      <div style="position:absolute; bottom:-18px; left:20px; font-size:12px;">
+        您能想像到的最糟的健康狀況（0）
+      </div>
+    </div>
+
+    <div class="vas-input">
+      您今天的健康狀況 =
+      <input type="number" name="vas_today" min="0" max="100" style="width:70px;">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
